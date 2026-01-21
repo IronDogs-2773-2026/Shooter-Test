@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import frc.robot.OdometrySubsystem;
+import frc.robot.OdometrySubsystem.Side;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -41,14 +43,14 @@ public class Robot extends TimedRobot {
 
   private final XboxController controller = new XboxController(0);
 
+  private final OdometrySubsystem odomSub = new OdometrySubsystem();
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
   public Robot() {
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
-    SmartDashboard.putData("Auto choices", m_chooser);
+   
 
     // ------------------------------------------------------------------------------------------------------------------------------------------------------------------
     driveMotorLeft1.setInverted(false);
@@ -117,6 +119,10 @@ public class Robot extends TimedRobot {
    
 
     driveTrain.curvatureDrive(controller.getRightX(), controller.getLeftY(), true);
+
+    // odomSub.log(String.valueOf(odomSub.);
+    odomSub.periodic();
+    SmartDashboard.putString("Pose ", "" + odomSub.logPose());
   }
 
   private void feed() {

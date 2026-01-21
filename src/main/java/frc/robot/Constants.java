@@ -4,9 +4,12 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.util.Units;
+
 /** Add your docs here. */
 public class Constants {
     public static final double maxFlywheelSpeed = 1;
     public static final double accelerationLimit = 3; // units per second
     public static final double turnLimit = 5; // units per second
+    public static final double wheelCircumference = 0.47878; // meters
 }
